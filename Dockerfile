@@ -59,6 +59,7 @@ RUN apt-get install -y git-core
 # && \
 # rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
 # ADD ./Postgres-XL /Postgres-XL
 RUN git clone --depth 1 https://github.com/techdragon/Postgres-XL.git
 
@@ -73,12 +74,19 @@ WORKDIR /Postgres-XL/contrib
 RUN make install
 
 ENV PATH /opt/pgxl/bin:$PATH
-ENV PGDATA /root/pgxc
+# ENV PGDATA /root/pgxc
 
 ### LD
 
 RUN echo "/usr/local/lib" >> /etc/ld.so.conf
 RUN echo "/opt/pgxl/lib" >> /etc/ld.so.conf
 RUN ldconfig
+
+RUN adduser -m --disabled-password --gecos "" pgxl
+
+USER pgxl
+WORKDIR /user/pgxl/
+
+RUN mkdir /user/pgxl/pgdata
 
 EXPOSE 5432
