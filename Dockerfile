@@ -82,7 +82,7 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf
 RUN echo "/opt/pgxl/lib" >> /etc/ld.so.conf
 RUN ldconfig
 
-RUN ["useradd", "-D", "DIR_MODE=0755" "-m", "pgxl"]
+RUN ["useradd", "-D", "DIR_MODE=0755", "-m", "pgxl"]
 
 USER pgxl
 WORKDIR /user/pgxl/
