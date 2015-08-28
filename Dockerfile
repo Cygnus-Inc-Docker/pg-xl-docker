@@ -82,7 +82,7 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf
 RUN echo "/opt/pgxl/lib" >> /etc/ld.so.conf
 RUN ldconfig
 
-RUN adduser -m --disabled-password --gecos "" pgxl
+RUN ["adduser", "-m", "--disabled-password", "--gecos", "\"\"", "pgxl"]
 
 USER pgxl
 WORKDIR /user/pgxl/
