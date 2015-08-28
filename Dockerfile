@@ -1,4 +1,5 @@
 FROM ubuntu:14.04
+# FROM debian
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -13,8 +14,8 @@ RUN apt-get install -y gcc
 RUN apt-get install -y make
 RUN apt-get install -y pgxnclient
 RUN apt-get install -y python-dev
+RUN apt-get install -y git-core
 # RUN apt-get install -y supervisor
-# RUN apt-get install -y git
 # RUN apt-get install -y vim
 # RUN apt-get install -y rsync
 # RUN apt-get install -y screen 
@@ -58,8 +59,8 @@ RUN apt-get install -y python-dev
 # && \
 # rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD ./Postgres-XL /Postgres-XL
-
+# ADD ./Postgres-XL /Postgres-XL
+RUN git clone --depth 1 https://github.com/techdragon/Postgres-XL.git
 
 WORKDIR /Postgres-XL
 RUN ./configure --with-python --prefix /opt/pgxl
@@ -73,7 +74,6 @@ RUN make install
 
 ENV PATH /opt/pgxl/bin:$PATH
 ENV PGDATA /root/pgxc
-
 
 ### LD
 
