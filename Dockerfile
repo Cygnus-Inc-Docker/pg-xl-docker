@@ -74,7 +74,6 @@ WORKDIR /Postgres-XL/contrib
 RUN make install
 
 ENV PATH /opt/pgxl/bin:$PATH
-# ENV PGDATA /root/pgxc
 
 ### LD
 
@@ -87,6 +86,8 @@ RUN ["useradd", "-m", "pgxl"]
 USER pgxl
 WORKDIR /home/pgxl/
 
-RUN mkdir /home/pgxl/pgdata
+RUN ["mkdir", "-m", "700", "/home/pgxl/pgdata"]
+ENV PGDATA /home/pgxl/pgdata
 
+LABEL application="pgxl"
 EXPOSE 5432
