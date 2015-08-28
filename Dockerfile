@@ -82,11 +82,11 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf
 RUN echo "/opt/pgxl/lib" >> /etc/ld.so.conf
 RUN ldconfig
 
-RUN ["useradd", "-D", "DIR_MODE=0755", "-m", "pgxl"]
+RUN ["useradd", "-m", "pgxl"]
 
 USER pgxl
-WORKDIR /user/pgxl/
+WORKDIR /home/pgxl/
 
-RUN mkdir /user/pgxl/pgdata
+RUN mkdir /home/pgxl/pgdata
 
 EXPOSE 5432
